@@ -1,2 +1,2 @@
-# keyora-password-generator
-A free, secure, browser-based password generator with customizable length and character options.
+# keyora-free-tool
+A free, secure, browser-based password generator with other free tools.
