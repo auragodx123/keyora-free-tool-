@@ -5,246 +5,431 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="Generate strong random passwords for free. Choose your password length and character types. Fast, private and easy to use.">
-  <title>Keyora — Free Password Generator</title>
+  <meta name="description" content="Keyora offers free online tools: a secure password generator, word counter, percentage calculator and username generator.">
+  <title>Keyora — Free Online Tools</title>
 
   <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f8fa;
+      --text: #17191f;
+      --muted: #737782;
+      --border: #e6e8ed;
+      --accent: #5546e8;
+      --accent-hover: #4335cb;
+      --success: #16865b;
+      --radius: 16px;
+    }
+
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      background: #f8fafc;
-      color: #172033;
-      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
       line-height: 1.6;
     }
 
-    header {
-      background: white;
-      border-bottom: 1px solid #e8edf3;
-      padding: 18px 20px;
-    }
-
-    nav {
-      max-width: 900px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-size: 23px;
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
-
-    .logo span {
-      color: #4169e1;
-    }
-
-    .badge {
-      color: #4169e1;
-      background: #edf2ff;
-      border-radius: 20px;
-      padding: 5px 10px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    main {
-      max-width: 650px;
-      margin: 55px auto;
-      padding: 0 18px;
-    }
-
-    .intro {
-      text-align: center;
-      margin-bottom: 28px;
-    }
-
-    h1 {
-      font-size: clamp(30px, 7vw, 43px);
-      letter-spacing: -1.5px;
-      line-height: 1.2;
-      margin: 12px 0;
-    }
-
-    .intro p {
-      color: #667085;
-      margin: 0;
-    }
-
-    .card {
-      background: white;
-      border: 1px solid #e4e9f0;
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: 0 12px 35px #17203308;
-    }
-
-    .label {
-      display: block;
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 9px;
-    }
-
-    .password-box {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid #dce3ed;
-      border-radius: 11px;
-      padding: 9px;
-      background: #fbfcfe;
-    }
-
-    #password {
-      width: 100%;
-      min-width: 0;
-      border: none;
-      outline: none;
-      background: transparent;
-      color: #172033;
-      font-size: 15px;
-      font-family: monospace;
+    button, input, textarea, select {
+      font: inherit;
     }
 
     button {
       cursor: pointer;
-      font: inherit;
-      font-weight: 700;
-      border: none;
-      border-radius: 10px;
-      transition: background 0.2s;
     }
 
-    .copy-btn {
-      background: #edf2ff;
-      color: #3155bf;
-      padding: 10px 12px;
-      white-space: nowrap;
+    button:focus-visible, input:focus-visible,
+    textarea:focus-visible, select:focus-visible {
+      outline: 3px solid #aaa3ff;
+      outline-offset: 2px;
     }
 
-    .copy-btn:hover {
-      background: #dce6ff;
+    .container {
+      width: min(100% - 32px, 960px);
+      margin: auto;
     }
 
-    .strength {
-      color: #16834a;
-      font-size: 12px;
-      margin-top: 9px;
+    header {
+      border-bottom: 1px solid var(--border);
+      background: #fff;
     }
 
-    .setting {
-      margin-top: 25px;
-    }
-
-    .length-row {
+    .nav {
+      min-height: 76px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      gap: 16px;
     }
 
-    #lengthValue {
+    .brand {
+      color: var(--text);
+      font-size: 25px;
+      font-weight: 850;
+      letter-spacing: -1.2px;
+      text-decoration: none;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-note {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .hero {
+      padding: 48px 0 28px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
       font-weight: 800;
-      color: #4169e1;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 10px 0;
+      font-size: clamp(34px, 7vw, 52px);
+      line-height: 1.12;
+      letter-spacing: -2px;
+    }
+
+    .hero p {
+      max-width: 570px;
+      margin: 14px auto 0;
+      color: var(--muted);
+    }
+
+    .tool-nav {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 24px 0;
+    }
+
+    .tool-tab {
+      min-height: 74px;
+      padding: 12px 6px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: white;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .tool-tab .emoji {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 20px;
+    }
+
+    .tool-tab.active {
+      border-color: var(--accent);
+      background: #f1efff;
+      color: var(--accent);
+    }
+
+    .panel {
+      padding: clamp(18px, 4vw, 30px);
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: 0 8px 35px rgba(25, 25, 60, 0.045);
+    }
+
+    .tool-section[hidden] {
+      display: none;
+    }
+
+    .tool-heading {
+      margin-bottom: 22px;
+    }
+
+    .tool-heading h2 {
+      margin: 0 0 5px;
+      font-size: 24px;
+      letter-spacing: -0.7px;
+    }
+
+    .tool-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .field {
+      margin: 18px 0;
+    }
+
+    label, .field-label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    input[type="number"], input[type="text"],
+    textarea, select {
+      width: 100%;
+      padding: 12px 13px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: white;
+      color: var(--text);
+    }
+
+    textarea {
+      min-height: 170px;
+      resize: vertical;
     }
 
     input[type="range"] {
       width: 100%;
-      accent-color: #4169e1;
-      margin: 17px 0;
+      accent-color: var(--accent);
     }
 
-    .options {
+    .range-row, .output-top, .section-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .length-value {
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .checks {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 15px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
     }
 
-    .option {
+    .check {
       display: flex;
       align-items: center;
       gap: 9px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
       font-size: 14px;
+      font-weight: 500;
     }
 
-    input[type="checkbox"] {
+    .check input {
       width: 17px;
       height: 17px;
-      accent-color: #4169e1;
+      accent-color: var(--accent);
     }
 
-    .generate-btn {
-      width: 100%;
-      margin-top: 27px;
-      background: #4169e1;
-      color: white;
-      padding: 14px;
+    .output-box {
+      padding: 15px;
+      margin: 22px 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
     }
 
-    .generate-btn:hover {
-      background: #3155bf;
-    }
-
-    .privacy {
-      text-align: center;
-      color: #667085;
+    .output-top {
+      margin-bottom: 10px;
+      color: var(--muted);
       font-size: 12px;
+      font-weight: 700;
+    }
+
+    .output-text {
+      overflow-wrap: anywhere;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 17px;
+      font-weight: 650;
+    }
+
+    .result {
+      padding: 16px;
+      margin-top: 20px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+    }
+
+    .result-label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .result-value {
+      margin-top: 4px;
+      font-size: clamp(24px, 5vw, 34px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      overflow-wrap: anywhere;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .stat {
+      padding: 12px 7px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 22px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      min-height: 45px;
+      padding: 11px 18px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: white;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .btn.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn.primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .hint {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .username-list {
+      display: grid;
+      gap: 10px;
       margin-top: 18px;
     }
 
-    .content {
-      margin-top: 36px;
+    .username-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow-wrap: anywhere;
+    }
+
+    .username-item strong {
+      font-size: 14px;
+    }
+
+    .username-item button {
+      flex-shrink: 0;
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
       background: white;
-      border: 1px solid #e4e9f0;
-      border-radius: 15px;
-      padding: 22px;
+      font-size: 12px;
+      font-weight: 700;
     }
 
-    .content h2 {
-      font-size: 19px;
+    .about {
+      padding: 24px 0 42px;
     }
 
-    .content p {
-      color: #667085;
+    .about h2 {
+      font-size: 21px;
+    }
+
+    .about p {
+      color: var(--muted);
       font-size: 14px;
     }
 
     footer {
+      padding: 22px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
       text-align: center;
-      padding: 25px 15px;
-      color: #667085;
-      font-size: 12px;
     }
 
-    .message {
+    .status {
       min-height: 20px;
-      font-size: 12px;
-      color: #3155bf;
-      margin-top: 7px;
+      margin-top: 10px;
+      color: var(--success);
+      font-size: 13px;
     }
 
-    @media (max-width: 480px) {
-      main {
-        margin-top: 35px;
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 22px, 960px);
       }
 
-      .card {
-        padding: 19px;
+      .nav {
+        min-height: 64px;
       }
 
-      .options {
-        gap: 13px 8px;
+      .nav-note {
+        font-size: 11px;
       }
 
-      .option {
-        font-size: 13px;
+      .hero {
+        padding-top: 35px;
+      }
+
+      .tool-nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .tool-tab {
+        min-height: 66px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .btn {
+        flex: 1;
       }
     }
   </style>
@@ -252,252 +437,361 @@
 
 <body>
   <header>
-    <nav>
-      <div class="logo">Key<span>ora</span></div>
-      <div class="badge">FREE TOOL</div>
-    </nav>
+    <div class="container nav">
+      <a class="brand" href="#" aria-label="Keyora home">
+        keyora<span>.</span>
+      </a>
+      <span class="nav-note">Free tools. Simple solutions.</span>
+    </div>
   </header>
 
-  <main>
-    <section class="intro">
-      <div class="badge">PASSWORD SECURITY</div>
-      <h1>Generate a strong password.</h1>
-      <p>Create a random password in seconds. Simple, free and private.</p>
+  <main class="container">
+    <section class="hero">
+      <div class="eyebrow">Your everyday toolkit</div>
+      <h1>Small tools.<br>Big convenience.</h1>
+      <p>
+        Useful online tools for everyday tasks.
+        Free to use, simple to understand, and ready when you need them.
+      </p>
     </section>
 
-    <section class="card">
-      <label class="label" for="password">YOUR PASSWORD</label>
-
-      <div class="password-box">
-        <input
-          id="password"
-          type="text"
-          value=""
-          placeholder="Your password will appear here"
-          readonly
-          autocomplete="off"
-          spellcheck="false"
-          aria-label="Generated password"
-        >
-        <button class="copy-btn" id="copyBtn" type="button">
-          Copy
-        </button>
-      </div>
-
-      <div class="strength" id="status" aria-live="polite">
-        Ready to generate
-      </div>
-      <div class="message" id="message" aria-live="polite"></div>
-
-      <div class="setting">
-        <div class="length-row">
-          <label class="label" for="length">Password length</label>
-          <span id="lengthValue">16</span>
-        </div>
-
-        <input
-          id="length"
-          type="range"
-          min="8"
-          max="64"
-          value="16"
-        >
-      </div>
-
-      <div class="setting">
-        <span class="label">Character types</span>
-
-        <div class="options">
-          <label class="option">
-            <input type="checkbox" id="upper" checked>
-            Uppercase (A–Z)
-          </label>
-
-          <label class="option">
-            <input type="checkbox" id="lower" checked>
-            Lowercase (a–z)
-          </label>
-
-          <label class="option">
-            <input type="checkbox" id="numbers" checked>
-            Numbers (0–9)
-          </label>
-
-          <label class="option">
-            <input type="checkbox" id="symbols" checked>
-            Symbols (!@#$)
-          </label>
-        </div>
-      </div>
-
-      <button class="generate-btn" id="generateBtn" type="button">
-        Generate Password
+    <nav class="tool-nav" aria-label="Choose a tool">
+      <button class="tool-tab active" data-tool="password" aria-pressed="true">
+        <span class="emoji">🔐</span>Password Generator
       </button>
+      <button class="tool-tab" data-tool="words" aria-pressed="false">
+        <span class="emoji">✍️</span>Word Counter
+      </button>
+      <button class="tool-tab" data-tool="percentage" aria-pressed="false">
+        <span class="emoji">🧮</span>Percentage
+      </button>
+      <button class="tool-tab" data-tool="username" aria-pressed="false">
+        <span class="emoji">🎮</span>Username Generator
+      </button>
+    </nav>
 
-      <p class="privacy">
-        Passwords are generated in your browser and are not
-        intentionally sent to a server or saved by this tool.
-      </p>
-    </section>
+    <div class="panel">
 
-    <section class="content">
-      <h2>How does Keyora work?</h2>
+      <!-- PASSWORD GENERATOR -->
+      <section class="tool-section" id="password">
+        <div class="tool-heading">
+          <h2>Password Generator</h2>
+          <p>Create a random password with your preferred settings.</p>
+        </div>
+
+        <div class="field">
+          <div class="range-row">
+            <label for="passLength">Password length</label>
+            <span class="length-value" id="lengthValue">16</span>
+          </div>
+          <input id="passLength" type="range" min="8" max="64" value="16">
+        </div>
+
+        <div class="field">
+          <span class="field-label">Include characters</span>
+          <div class="checks">
+            <label class="check">
+              <input id="upper" type="checkbox" checked>
+              Uppercase (A–Z)
+            </label>
+            <label class="check">
+              <input id="lower" type="checkbox" checked>
+              Lowercase (a–z)
+            </label>
+            <label class="check">
+              <input id="numbers" type="checkbox" checked>
+              Numbers (0–9)
+            </label>
+            <label class="check">
+              <input id="symbols" type="checkbox" checked>
+              Symbols (!@#)
+            </label>
+          </div>
+        </div>
+
+        <div class="output-box">
+          <div class="output-top">
+            <span>Your password</span>
+            <span id="passStrength">Randomly generated</span>
+          </div>
+          <div class="output-text" id="passwordOutput" aria-live="polite">
+            Tap Generate Password
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button class="btn primary" id="generatePassword">
+            Generate Password
+          </button>
+          <button class="btn" id="copyPassword">Copy Password</button>
+        </div>
+        <p class="hint">
+          Passwords are generated locally in your browser and are not sent
+          to Keyora's server.
+        </p>
+        <div class="status" id="passwordStatus" aria-live="polite"></div>
+      </section>
+
+      <!-- WORD COUNTER -->
+      <section class="tool-section" id="words" hidden>
+        <div class="tool-heading">
+          <h2>Word Counter</h2>
+          <p>Count words, characters, sentences and paragraphs instantly.</p>
+        </div>
+
+        <div class="field">
+          <label for="wordText">Enter or paste your text</label>
+          <textarea id="wordText"
+            placeholder="Start typing or paste your text here..."></textarea>
+        </div>
+
+        <div class="stats" aria-live="polite">
+          <div class="stat">
+            <strong id="wordCount">0</strong>
+            <span>Words</span>
+          </div>
+          <div class="stat">
+            <strong id="charCount">0</strong>
+            <span>Characters</span>
+          </div>
+          <div class="stat">
+            <strong id="sentenceCount">0</strong>
+            <span>Sentences</span>
+          </div>
+          <div class="stat">
+            <strong id="paragraphCount">0</strong>
+            <span>Paragraphs</span>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button class="btn" id="clearText">Clear Text</button>
+          <button class="btn primary" id="copyText">Copy Text</button>
+        </div>
+        <div class="status" id="wordStatus" aria-live="polite"></div>
+      </section>
+
+      <!-- PERCENTAGE CALCULATOR -->
+      <section class="tool-section" id="percentage" hidden>
+        <div class="tool-heading">
+          <h2>Percentage Calculator</h2>
+          <p>Calculate percentages, discounts and percentage changes.</p>
+        </div>
+
+        <div class="field">
+          <label for="calcMode">What do you want to calculate?</label>
+          <select id="calcMode">
+            <option value="of">What is X% of Y?</option>
+            <option value="what">X is what percentage of Y?</option>
+            <option value="change">Percentage change from old to new</option>
+            <option value="discount">Price after a discount</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label id="firstLabel" for="firstNumber">Percentage (X)</label>
+          <input id="firstNumber" type="number" step="any" value="20"
+            inputmode="decimal">
+        </div>
+
+        <div class="field">
+          <label id="secondLabel" for="secondNumber">Number (Y)</label>
+          <input id="secondNumber" type="number" step="any" value="150"
+            inputmode="decimal">
+        </div>
+
+        <div class="result">
+          <div class="result-label">Your result</div>
+          <div class="result-value" id="calcResult" aria-live="polite">30</div>
+          <p class="hint" id="calcExplanation">20% of 150 is 30.</p>
+        </div>
+
+        <div class="button-row">
+          <button class="btn primary" id="calculate">Calculate</button>
+          <button class="btn" id="copyResult">Copy Result</button>
+        </div>
+        <div class="status" id="calcStatus" aria-live="polite"></div>
+      </section>
+
+      <!-- USERNAME GENERATOR -->
+      <section class="tool-section" id="username" hidden>
+        <div class="tool-heading">
+          <h2>Username Generator</h2>
+          <p>Generate fun username ideas for games and social profiles.</p>
+        </div>
+
+        <div class="field">
+          <label for="usernameStyle">Choose a style</label>
+          <select id="usernameStyle">
+            <option value="cool">Cool & modern</option>
+            <option value="gaming">Gaming</option>
+            <option value="nature">Nature</option>
+            <option value="minimal">Short & simple</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="usernameWord">Optional word to include</label>
+          <input id="usernameWord" type="text" maxlength="18"
+            placeholder="e.g. Nova">
+        </div>
+
+        <div class="field">
+          <label class="check">
+            <input id="usernameNumbers" type="checkbox" checked>
+            Add numbers to username ideas
+          </label>
+        </div>
+
+        <button class="btn primary" id="generateUsernames">
+          Generate Usernames
+        </button>
+
+        <div class="username-list" id="usernameList" aria-live="polite">
+          <p class="hint">Tap Generate Usernames to see your ideas.</p>
+        </div>
+        <div class="status" id="usernameStatus" aria-live="polite"></div>
+        <p class="hint">
+          Username availability is not checked. A generated name may
+          already be in use on another platform.
+        </p>
+      </section>
+
+    </div>
+
+    <section class="about">
+      <h2>Simple tools for everyday life</h2>
       <p>
-        Choose your password length and the character types you
-        want. Keyora uses your browser's cryptographic random
-        number generator to create a password.
+        Keyora brings useful little utilities together in one place.
+        Whether you need to create a random password, count words,
+        calculate a percentage or brainstorm a username, you can do
+        it without installing another app.
       </p>
-
-      <h2>Tips for better password security</h2>
       <p>
-        Use a different password for every account. Consider
-        using a password manager, and enable two-factor
-        authentication wherever possible.
+        Keyora's tools are designed to run in your browser.
+        Calculation and text-counting features do not require an account.
       </p>
     </section>
   </main>
 
   <footer>
-    Keyora · Free password generator · Use responsibly
+    <div class="container">
+      © <span id="year"></span> Keyora. Free online tools.
+    </div>
   </footer>
 
   <script>
-    "use strict";
+    // TOOL NAVIGATION
+    const tabs = document.querySelectorAll(".tool-tab");
+    const sections = document.querySelectorAll(".tool-section");
 
-    const passwordField = document.getElementById("password");
-    const lengthInput = document.getElementById("length");
-    const lengthValue = document.getElementById("lengthValue");
-    const statusText = document.getElementById("status");
-    const message = document.getElementById("message");
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        const selected = tab.dataset.tool;
 
-    const groups = [
-      { id: "upper", chars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ" },
-      { id: "lower", chars: "abcdefghijklmnopqrstuvwxyz" },
-      { id: "numbers", chars: "0123456789" },
-      { id: "symbols", chars: "!@#$%^&*()-_=+[]{}?" }
-    ];
+        tabs.forEach(item => {
+          const active = item === tab;
+          item.classList.toggle("active", active);
+          item.setAttribute("aria-pressed", String(active));
+        });
 
-    // Rejection sampling avoids modulo bias.
-    function secureIndex(max) {
-      const limit = Math.floor(256 / max) * max;
-      const bytes = new Uint8Array(1);
-      let value;
+        sections.forEach(section => {
+          section.hidden = section.id !== selected;
+        });
+      });
+    });
 
-      do {
-        crypto.getRandomValues(bytes);
-        value = bytes[0];
-      } while (value >= limit);
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
 
-      return value % max;
-    }
-
-    function secureShuffle(items) {
-      for (let i = items.length - 1; i > 0; i--) {
-        const j = secureIndex(i + 1);
-        [items[i], items[j]] = [items[j], items[i]];
-      }
-      return items;
-    }
-
-    function generatePassword() {
-      message.textContent = "";
-      const length = Number(lengthInput.value);
-
-      const selected = groups.filter(
-        group => document.getElementById(group.id).checked
-      );
-
-      if (selected.length === 0) {
-        passwordField.value = "";
-        statusText.textContent = "Choose at least one character type.";
-        return;
-      }
-
-      if (length < selected.length) {
-        passwordField.value = "";
-        statusText.textContent =
-          "Increase the length to fit every selected character type.";
-        return;
-      }
-
-      if (!globalThis.crypto ||
-          typeof crypto.getRandomValues !== "function") {
-        passwordField.value = "";
-        statusText.textContent =
-          "Secure generation is unavailable in this browser.";
+    // SHARED HELPERS
+    async function copyTextToClipboard(text, statusElement) {
+      if (!text) {
+        statusElement.textContent = "There is nothing to copy yet.";
         return;
       }
 
       try {
-        const allChars = selected.map(group => group.chars).join("");
-        const result = [];
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const temporary = document.createElement("textarea");
+          temporary.value = text;
+          temporary.style.position = "fixed";
+          temporary.style.opacity = "0";
+          document.body.appendChild(temporary);
+          temporary.select();
 
-        // Ensure every selected type appears at least once.
-        for (const group of selected) {
-          result.push(group.chars[secureIndex(group.chars.length)]);
+          const copied = document.execCommand("copy");
+          temporary.remove();
+
+          if (!copied) throw new Error("Copy failed");
         }
 
-        // Fill the remaining positions securely.
-        while (result.length < length) {
-          result.push(allChars[secureIndex(allChars.length)]);
-        }
-
-        secureShuffle(result);
-
-        passwordField.value = result.join("");
-        statusText.textContent =
-          "Generated locally · " + length + " characters";
-      } catch (error) {
-        passwordField.value = "";
-        statusText.textContent =
-          "Couldn't generate a password. Please try again.";
+        statusElement.textContent = "Copied to clipboard!";
+      } catch {
+        statusElement.textContent =
+          "Copy failed. Please select and copy the text manually.";
       }
     }
 
-    lengthInput.addEventListener("input", () => {
-      lengthValue.textContent = lengthInput.value;
-    });
-
-    document.getElementById("generateBtn").addEventListener(
-      "click",
-      generatePassword
-    );
-
-    document.getElementById("copyBtn").addEventListener(
-      "click",
-      async () => {
-        message.textContent = "";
-
-        if (!passwordField.value) {
-          message.textContent = "Generate a password first.";
-          return;
-        }
-
-        try {
-          await navigator.clipboard.writeText(passwordField.value);
-          message.textContent = "Password copied.";
-        } catch (error) {
-          message.textContent =
-            "Copy unavailable. Select and copy the password manually.";
-        }
+    function randomInt(max) {
+      if (!Number.isSafeInteger(max) || max < 1) {
+        throw new Error("Invalid random range.");
       }
-    );
 
-    for (const group of groups) {
-      document.getElementById(group.id).addEventListener(
-        "change",
-        () => {
-          if (passwordField.value) generatePassword();
-        }
-      );
+      // Rejection sampling avoids modulo bias.
+      const range = 0x100000000;
+      const limit = range - (range % max);
+      const values = new Uint32Array(1);
+
+      do {
+        crypto.getRandomValues(values);
+      } while (values[0] >= limit);
+
+      return values[0] % max;
     }
 
-    lengthInput.addEventListener("change", () => {
-      if (passwordField.value) generatePassword();
+    function randomFrom(text) {
+      return text[randomInt(text.length)];
+    }
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = randomInt(i + 1);
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function formatNumber(number) {
+      return Number(number.toLocaleString("en-US", {
+        maximumFractionDigits: 8
+      })).toLocaleString("en-US", {
+        maximumFractionDigits: 8
+      });
+    }
+
+    // PASSWORD GENERATOR
+    const passLength = document.getElementById("passLength");
+    const lengthValue = document.getElementById("lengthValue");
+    const passwordOutput = document.getElementById("passwordOutput");
+    const passwordStatus = document.getElementById("passwordStatus");
+
+    passLength.addEventListener("input", () => {
+      lengthValue.textContent = passLength.value;
     });
 
-    generatePassword();
-  </script>
-</body>
-</html>
-  
+    function generatePassword() {
+      passwordStatus.textContent = "";
+
+      if (!window.crypto || !crypto.getRandomValues) {
+        passwordStatus.textContent =
+          "Secure random generation is not supported in this browser.";
+        return;
+      }
+
+      const groups = [];
+
+      if (document.getElementById("upper").checked)
+        groupsj
