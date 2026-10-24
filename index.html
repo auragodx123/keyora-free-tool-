@@ -1,0 +1,503 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Generate strong random passwords for free. Choose your password length and character types. Fast, private and easy to use.">
+  <title>Keyora — Free Password Generator</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f8fafc;
+      color: #172033;
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e8edf3;
+      padding: 18px 20px;
+    }
+
+    nav {
+      max-width: 900px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #4169e1;
+    }
+
+    .badge {
+      color: #4169e1;
+      background: #edf2ff;
+      border-radius: 20px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    main {
+      max-width: 650px;
+      margin: 55px auto;
+      padding: 0 18px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      font-size: clamp(30px, 7vw, 43px);
+      letter-spacing: -1.5px;
+      line-height: 1.2;
+      margin: 12px 0;
+    }
+
+    .intro p {
+      color: #667085;
+      margin: 0;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #e4e9f0;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 12px 35px #17203308;
+    }
+
+    .label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+
+    .password-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #dce3ed;
+      border-radius: 11px;
+      padding: 9px;
+      background: #fbfcfe;
+    }
+
+    #password {
+      width: 100%;
+      min-width: 0;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: #172033;
+      font-size: 15px;
+      font-family: monospace;
+    }
+
+    button {
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      transition: background 0.2s;
+    }
+
+    .copy-btn {
+      background: #edf2ff;
+      color: #3155bf;
+      padding: 10px 12px;
+      white-space: nowrap;
+    }
+
+    .copy-btn:hover {
+      background: #dce6ff;
+    }
+
+    .strength {
+      color: #16834a;
+      font-size: 12px;
+      margin-top: 9px;
+    }
+
+    .setting {
+      margin-top: 25px;
+    }
+
+    .length-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #lengthValue {
+      font-weight: 800;
+      color: #4169e1;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: #4169e1;
+      margin: 17px 0;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 15px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 14px;
+    }
+
+    input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      accent-color: #4169e1;
+    }
+
+    .generate-btn {
+      width: 100%;
+      margin-top: 27px;
+      background: #4169e1;
+      color: white;
+      padding: 14px;
+    }
+
+    .generate-btn:hover {
+      background: #3155bf;
+    }
+
+    .privacy {
+      text-align: center;
+      color: #667085;
+      font-size: 12px;
+      margin-top: 18px;
+    }
+
+    .content {
+      margin-top: 36px;
+      background: white;
+      border: 1px solid #e4e9f0;
+      border-radius: 15px;
+      padding: 22px;
+    }
+
+    .content h2 {
+      font-size: 19px;
+    }
+
+    .content p {
+      color: #667085;
+      font-size: 14px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      color: #667085;
+      font-size: 12px;
+    }
+
+    .message {
+      min-height: 20px;
+      font-size: 12px;
+      color: #3155bf;
+      margin-top: 7px;
+    }
+
+    @media (max-width: 480px) {
+      main {
+        margin-top: 35px;
+      }
+
+      .card {
+        padding: 19px;
+      }
+
+      .options {
+        gap: 13px 8px;
+      }
+
+      .option {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo">Key<span>ora</span></div>
+      <div class="badge">FREE TOOL</div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="badge">PASSWORD SECURITY</div>
+      <h1>Generate a strong password.</h1>
+      <p>Create a random password in seconds. Simple, free and private.</p>
+    </section>
+
+    <section class="card">
+      <label class="label" for="password">YOUR PASSWORD</label>
+
+      <div class="password-box">
+        <input
+          id="password"
+          type="text"
+          value=""
+          placeholder="Your password will appear here"
+          readonly
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Generated password"
+        >
+        <button class="copy-btn" id="copyBtn" type="button">
+          Copy
+        </button>
+      </div>
+
+      <div class="strength" id="status" aria-live="polite">
+        Ready to generate
+      </div>
+      <div class="message" id="message" aria-live="polite"></div>
+
+      <div class="setting">
+        <div class="length-row">
+          <label class="label" for="length">Password length</label>
+          <span id="lengthValue">16</span>
+        </div>
+
+        <input
+          id="length"
+          type="range"
+          min="8"
+          max="64"
+          value="16"
+        >
+      </div>
+
+      <div class="setting">
+        <span class="label">Character types</span>
+
+        <div class="options">
+          <label class="option">
+            <input type="checkbox" id="upper" checked>
+            Uppercase (A–Z)
+          </label>
+
+          <label class="option">
+            <input type="checkbox" id="lower" checked>
+            Lowercase (a–z)
+          </label>
+
+          <label class="option">
+            <input type="checkbox" id="numbers" checked>
+            Numbers (0–9)
+          </label>
+
+          <label class="option">
+            <input type="checkbox" id="symbols" checked>
+            Symbols (!@#$)
+          </label>
+        </div>
+      </div>
+
+      <button class="generate-btn" id="generateBtn" type="button">
+        Generate Password
+      </button>
+
+      <p class="privacy">
+        Passwords are generated in your browser and are not
+        intentionally sent to a server or saved by this tool.
+      </p>
+    </section>
+
+    <section class="content">
+      <h2>How does Keyora work?</h2>
+      <p>
+        Choose your password length and the character types you
+        want. Keyora uses your browser's cryptographic random
+        number generator to create a password.
+      </p>
+
+      <h2>Tips for better password security</h2>
+      <p>
+        Use a different password for every account. Consider
+        using a password manager, and enable two-factor
+        authentication wherever possible.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    Keyora · Free password generator · Use responsibly
+  </footer>
+
+  <script>
+    "use strict";
+
+    const passwordField = document.getElementById("password");
+    const lengthInput = document.getElementById("length");
+    const lengthValue = document.getElementById("lengthValue");
+    const statusText = document.getElementById("status");
+    const message = document.getElementById("message");
+
+    const groups = [
+      { id: "upper", chars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ" },
+      { id: "lower", chars: "abcdefghijklmnopqrstuvwxyz" },
+      { id: "numbers", chars: "0123456789" },
+      { id: "symbols", chars: "!@#$%^&*()-_=+[]{}?" }
+    ];
+
+    // Rejection sampling avoids modulo bias.
+    function secureIndex(max) {
+      const limit = Math.floor(256 / max) * max;
+      const bytes = new Uint8Array(1);
+      let value;
+
+      do {
+        crypto.getRandomValues(bytes);
+        value = bytes[0];
+      } while (value >= limit);
+
+      return value % max;
+    }
+
+    function secureShuffle(items) {
+      for (let i = items.length - 1; i > 0; i--) {
+        const j = secureIndex(i + 1);
+        [items[i], items[j]] = [items[j], items[i]];
+      }
+      return items;
+    }
+
+    function generatePassword() {
+      message.textContent = "";
+      const length = Number(lengthInput.value);
+
+      const selected = groups.filter(
+        group => document.getElementById(group.id).checked
+      );
+
+      if (selected.length === 0) {
+        passwordField.value = "";
+        statusText.textContent = "Choose at least one character type.";
+        return;
+      }
+
+      if (length < selected.length) {
+        passwordField.value = "";
+        statusText.textContent =
+          "Increase the length to fit every selected character type.";
+        return;
+      }
+
+      if (!globalThis.crypto ||
+          typeof crypto.getRandomValues !== "function") {
+        passwordField.value = "";
+        statusText.textContent =
+          "Secure generation is unavailable in this browser.";
+        return;
+      }
+
+      try {
+        const allChars = selected.map(group => group.chars).join("");
+        const result = [];
+
+        // Ensure every selected type appears at least once.
+        for (const group of selected) {
+          result.push(group.chars[secureIndex(group.chars.length)]);
+        }
+
+        // Fill the remaining positions securely.
+        while (result.length < length) {
+          result.push(allChars[secureIndex(allChars.length)]);
+        }
+
+        secureShuffle(result);
+
+        passwordField.value = result.join("");
+        statusText.textContent =
+          "Generated locally · " + length + " characters";
+      } catch (error) {
+        passwordField.value = "";
+        statusText.textContent =
+          "Couldn't generate a password. Please try again.";
+      }
+    }
+
+    lengthInput.addEventListener("input", () => {
+      lengthValue.textContent = lengthInput.value;
+    });
+
+    document.getElementById("generateBtn").addEventListener(
+      "click",
+      generatePassword
+    );
+
+    document.getElementById("copyBtn").addEventListener(
+      "click",
+      async () => {
+        message.textContent = "";
+
+        if (!passwordField.value) {
+          message.textContent = "Generate a password first.";
+          return;
+        }
+
+        try {
+          await navigator.clipboard.writeText(passwordField.value);
+          message.textContent = "Password copied.";
+        } catch (error) {
+          message.textContent =
+            "Copy unavailable. Select and copy the password manually.";
+        }
+      }
+    );
+
+    for (const group of groups) {
+      document.getElementById(group.id).addEventListener(
+        "change",
+        () => {
+          if (passwordField.value) generatePassword();
+        }
+      );
+    }
+
+    lengthInput.addEventListener("change", () => {
+      if (passwordField.value) generatePassword();
+    });
+
+    generatePassword();
+  </script>
+</body>
+</html>
+  
