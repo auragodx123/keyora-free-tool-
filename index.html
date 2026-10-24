@@ -3,63 +3,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="Keyora offers free online tools: a secure password generator, word counter, percentage calculator and username generator.">
-  <title>Keyora — Free Online Tools</title>
+  <meta name="description" content="Discover Keyora's free online tools for password generation, word counting, percentage calculations and username ideas. Simple tools. Smarter days.">
+  <meta name="robots" content="index, follow">
+  <title>Keyora — Simple Tools. Smarter Days.</title>
 
   <style>
     :root {
-      --bg: #ffffff;
-      --surface: #f7f8fa;
-      --text: #17191f;
-      --muted: #737782;
-      --border: #e6e8ed;
-      --accent: #5546e8;
-      --accent-hover: #4335cb;
-      --success: #16865b;
+      color-scheme: light;
+      --bg: #fff;
+      --surface: #f8f8fb;
+      --text: #191922;
+      --muted: #707080;
+      --border: #e8e8ef;
+      --accent: #5145cd;
+      --accent-hover: #4035ae;
+      --success: #147d55;
       --radius: 16px;
+      --shadow: 0 12px 35px rgba(25, 25, 50, .045);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       background: var(--bg);
       color: var(--text);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+      font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont,
         "Segoe UI", sans-serif;
-      line-height: 1.6;
     }
 
-    button, input, textarea, select {
-      font: inherit;
-    }
+    button, input, textarea, select { font: inherit; }
 
-    button {
-      cursor: pointer;
-    }
+    button { cursor: pointer; }
 
     button:focus-visible, input:focus-visible,
     textarea:focus-visible, select:focus-visible {
-      outline: 3px solid #aaa3ff;
-      outline-offset: 2px;
+      outline: 3px solid #b8b2ff;
+      outline-offset: 3px;
     }
 
     .container {
-      width: min(100% - 32px, 960px);
-      margin: auto;
+      width: min(100% - 32px, 900px);
+      margin-inline: auto;
     }
 
-    header {
-      border-bottom: 1px solid var(--border);
-      background: #fff;
-    }
+    header { border-bottom: 1px solid var(--border); }
 
     .nav {
-      min-height: 76px;
+      min-height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -68,23 +61,21 @@
 
     .brand {
       color: var(--text);
-      font-size: 25px;
-      font-weight: 850;
-      letter-spacing: -1.2px;
       text-decoration: none;
+      font-size: 26px;
+      font-weight: 850;
+      letter-spacing: -1.4px;
     }
 
-    .brand span {
-      color: var(--accent);
-    }
+    .brand span { color: var(--accent); }
 
-    .nav-note {
+    .tagline {
       color: var(--muted);
       font-size: 13px;
     }
 
     .hero {
-      padding: 48px 0 28px;
+      padding: 48px 0 22px;
       text-align: center;
     }
 
@@ -98,13 +89,13 @@
 
     h1 {
       margin: 10px 0;
-      font-size: clamp(34px, 7vw, 52px);
+      font-size: clamp(36px, 7vw, 52px);
       line-height: 1.12;
       letter-spacing: -2px;
     }
 
     .hero p {
-      max-width: 570px;
+      max-width: 560px;
       margin: 14px auto 0;
       color: var(--muted);
     }
@@ -116,61 +107,55 @@
       margin: 24px 0;
     }
 
-    .tool-tab {
-      min-height: 74px;
+    .tab {
+      min-height: 76px;
       padding: 12px 6px;
       border: 1px solid var(--border);
-      border-radius: 13px;
+      border-radius: 12px;
       background: white;
       color: var(--text);
       font-size: 13px;
       font-weight: 700;
     }
 
-    .tool-tab .emoji {
+    .tab .emoji {
       display: block;
       margin-bottom: 4px;
       font-size: 20px;
     }
 
-    .tool-tab.active {
+    .tab[aria-selected="true"] {
       border-color: var(--accent);
-      background: #f1efff;
+      background: #f2f0ff;
       color: var(--accent);
     }
 
     .panel {
       padding: clamp(18px, 4vw, 30px);
-      margin-bottom: 24px;
+      margin-bottom: 28px;
       border: 1px solid var(--border);
       border-radius: var(--radius);
       background: white;
-      box-shadow: 0 8px 35px rgba(25, 25, 60, 0.045);
+      box-shadow: var(--shadow);
     }
 
-    .tool-section[hidden] {
-      display: none;
-    }
+    .tool[hidden] { display: none; }
 
-    .tool-heading {
-      margin-bottom: 22px;
-    }
+    .tool-heading { margin-bottom: 24px; }
 
-    .tool-heading h2 {
+    h2 {
       margin: 0 0 5px;
-      font-size: 24px;
-      letter-spacing: -0.7px;
+      font-size: 25px;
+      letter-spacing: -.7px;
     }
 
-    .tool-heading p {
+    .tool-heading p, .muted {
       margin: 0;
       color: var(--muted);
       font-size: 14px;
     }
 
-    .field {
-      margin: 18px 0;
-    }
+    .field { margin: 18px 0; }
 
     label, .field-label {
       display: block;
@@ -179,10 +164,11 @@
       font-weight: 700;
     }
 
-    input[type="number"], input[type="text"],
+    input[type="text"], input[type="number"],
     textarea, select {
       width: 100%;
-      padding: 12px 13px;
+      min-height: 46px;
+      padding: 11px 13px;
       border: 1px solid var(--border);
       border-radius: 10px;
       background: white;
@@ -199,54 +185,52 @@
       accent-color: var(--accent);
     }
 
-    .range-row, .output-top, .section-title-row {
+    .between {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
     }
 
-    .length-value {
-      color: var(--accent);
-      font-weight: 800;
-    }
+    .accent-text { color: var(--accent); font-weight: 800; }
 
     .checks {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
+      gap: 10px;
     }
 
     .check {
       display: flex;
       align-items: center;
       gap: 9px;
-      padding: 12px;
+      padding: 11px;
       border: 1px solid var(--border);
       border-radius: 10px;
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 13px;
+      font-weight: 550;
     }
 
     .check input {
       width: 17px;
       height: 17px;
+      margin: 0;
       accent-color: var(--accent);
     }
 
-    .output-box {
-      padding: 15px;
+    .output {
+      padding: 16px;
       margin: 22px 0;
       border: 1px solid var(--border);
       border-radius: 12px;
       background: var(--surface);
     }
 
-    .output-top {
-      margin-bottom: 10px;
+    .output-label {
+      margin-bottom: 9px;
       color: var(--muted);
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 750;
     }
 
     .output-text {
@@ -254,51 +238,6 @@
       font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
       font-size: 17px;
       font-weight: 650;
-    }
-
-    .result {
-      padding: 16px;
-      margin-top: 20px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--surface);
-    }
-
-    .result-label {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .result-value {
-      margin-top: 4px;
-      font-size: clamp(24px, 5vw, 34px);
-      font-weight: 800;
-      letter-spacing: -1px;
-      overflow-wrap: anywhere;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 9px;
-      margin-top: 14px;
-    }
-
-    .stat {
-      padding: 12px 7px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 22px;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 11px;
     }
 
     .button-row {
@@ -309,8 +248,8 @@
     }
 
     .btn {
-      min-height: 45px;
-      padding: 11px 18px;
+      min-height: 44px;
+      padding: 10px 16px;
       border: 1px solid var(--border);
       border-radius: 10px;
       background: white;
@@ -325,13 +264,15 @@
       color: white;
     }
 
-    .btn.primary:hover {
-      background: var(--accent-hover);
-    }
+    .btn.primary:hover { background: var(--accent-hover); }
 
-    .btn:disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
+    .btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    .status {
+      min-height: 21px;
+      margin-top: 10px;
+      color: var(--success);
+      font-size: 13px;
     }
 
     .hint {
@@ -340,9 +281,43 @@
       font-size: 12px;
     }
 
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .stat {
+      padding: 12px 6px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .stat strong { display: block; font-size: 22px; }
+
+    .stat span { color: var(--muted); font-size: 11px; }
+
+    .result {
+      padding: 17px;
+      margin-top: 20px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+    }
+
+    .result-value {
+      margin-top: 5px;
+      font-size: clamp(25px, 5vw, 34px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      overflow-wrap: anywhere;
+    }
+
     .username-list {
       display: grid;
-      gap: 10px;
+      gap: 9px;
       margin-top: 18px;
     }
 
@@ -350,14 +325,14 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 12px;
       padding: 12px;
       border: 1px solid var(--border);
       border-radius: 10px;
-      overflow-wrap: anywhere;
     }
 
     .username-item strong {
+      overflow-wrap: anywhere;
       font-size: 14px;
     }
 
@@ -368,21 +343,12 @@
       border-radius: 8px;
       background: white;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 750;
     }
 
-    .about {
-      padding: 24px 0 42px;
-    }
+    .about { padding: 10px 0 35px; }
 
-    .about h2 {
-      font-size: 21px;
-    }
-
-    .about p {
-      color: var(--muted);
-      font-size: 14px;
-    }
+    .about p { color: var(--muted); font-size: 14px; }
 
     footer {
       padding: 22px 0;
@@ -392,45 +358,15 @@
       text-align: center;
     }
 
-    .status {
-      min-height: 20px;
-      margin-top: 10px;
-      color: var(--success);
-      font-size: 13px;
-    }
-
     @media (max-width: 560px) {
-      .container {
-        width: min(100% - 22px, 960px);
-      }
-
-      .nav {
-        min-height: 64px;
-      }
-
-      .nav-note {
-        font-size: 11px;
-      }
-
-      .hero {
-        padding-top: 35px;
-      }
-
-      .tool-nav {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .tool-tab {
-        min-height: 66px;
-      }
-
-      .stats {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .btn {
-        flex: 1;
-      }
+      .container { width: min(100% - 22px, 900px); }
+      .nav { min-height: 64px; }
+      .tagline { max-width: 125px; text-align: right; font-size: 11px; }
+      .hero { padding-top: 36px; }
+      .tool-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .tab { min-height: 66px; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .btn { flex: 1; }
     }
   </style>
 </head>
@@ -438,148 +374,111 @@
 <body>
   <header>
     <div class="container nav">
-      <a class="brand" href="#" aria-label="Keyora home">
-        keyora<span>.</span>
-      </a>
-      <span class="nav-note">Free tools. Simple solutions.</span>
+      <a class="brand" href="#" aria-label="Keyora home">keyora<span>.</span></a>
+      <span class="tagline">Simple tools. Smarter days.</span>
     </div>
   </header>
 
   <main class="container">
     <section class="hero">
       <div class="eyebrow">Your everyday toolkit</div>
-      <h1>Small tools.<br>Big convenience.</h1>
-      <p>
-        Useful online tools for everyday tasks.
-        Free to use, simple to understand, and ready when you need them.
-      </p>
+      <h1>Less hassle.<br>More done.</h1>
+      <p>Free, useful online tools for everyday tasks. No downloads or account required.</p>
     </section>
 
-    <nav class="tool-nav" aria-label="Choose a tool">
-      <button class="tool-tab active" data-tool="password" aria-pressed="true">
+    <nav class="tool-nav" role="tablist" aria-label="Choose a tool">
+      <button class="tab" id="tab-password" role="tab"
+        aria-controls="password" aria-selected="true" data-tool="password">
         <span class="emoji">🔐</span>Password Generator
       </button>
-      <button class="tool-tab" data-tool="words" aria-pressed="false">
+      <button class="tab" id="tab-words" role="tab"
+        aria-controls="words" aria-selected="false" data-tool="words">
         <span class="emoji">✍️</span>Word Counter
       </button>
-      <button class="tool-tab" data-tool="percentage" aria-pressed="false">
-        <span class="emoji">🧮</span>Percentage
+      <button class="tab" id="tab-percentage" role="tab"
+        aria-controls="percentage" aria-selected="false" data-tool="percentage">
+        <span class="emoji">🧮</span>Percentage Calculator
       </button>
-      <button class="tool-tab" data-tool="username" aria-pressed="false">
+      <button class="tab" id="tab-username" role="tab"
+        aria-controls="username" aria-selected="false" data-tool="username">
         <span class="emoji">🎮</span>Username Generator
       </button>
     </nav>
 
     <div class="panel">
-
-      <!-- PASSWORD GENERATOR -->
-      <section class="tool-section" id="password">
+      <section class="tool" id="password" role="tabpanel"
+        aria-labelledby="tab-password">
         <div class="tool-heading">
           <h2>Password Generator</h2>
-          <p>Create a random password with your preferred settings.</p>
+          <p>Create a random password with the character options you choose.</p>
         </div>
 
         <div class="field">
-          <div class="range-row">
+          <div class="between">
             <label for="passLength">Password length</label>
-            <span class="length-value" id="lengthValue">16</span>
+            <span class="accent-text" id="lengthValue">16</span>
           </div>
           <input id="passLength" type="range" min="8" max="64" value="16">
         </div>
 
         <div class="field">
-          <span class="field-label">Include characters</span>
+          <span class="field-label">Character types</span>
           <div class="checks">
-            <label class="check">
-              <input id="upper" type="checkbox" checked>
-              Uppercase (A–Z)
-            </label>
-            <label class="check">
-              <input id="lower" type="checkbox" checked>
-              Lowercase (a–z)
-            </label>
-            <label class="check">
-              <input id="numbers" type="checkbox" checked>
-              Numbers (0–9)
-            </label>
-            <label class="check">
-              <input id="symbols" type="checkbox" checked>
-              Symbols (!@#)
-            </label>
+            <label class="check"><input id="upper" type="checkbox" checked> Uppercase (A–Z)</label>
+            <label class="check"><input id="lower" type="checkbox" checked> Lowercase (a–z)</label>
+            <label class="check"><input id="numbers" type="checkbox" checked> Numbers (0–9)</label>
+            <label class="check"><input id="symbols" type="checkbox" checked> Symbols (!@#)</label>
           </div>
         </div>
 
-        <div class="output-box">
-          <div class="output-top">
-            <span>Your password</span>
-            <span id="passStrength">Randomly generated</span>
-          </div>
-          <div class="output-text" id="passwordOutput" aria-live="polite">
-            Tap Generate Password
-          </div>
+        <div class="output">
+          <div class="output-label">YOUR PASSWORD</div>
+          <div class="output-text" id="passwordOutput" aria-live="polite">Tap Generate Password</div>
         </div>
 
         <div class="button-row">
-          <button class="btn primary" id="generatePassword">
-            Generate Password
-          </button>
+          <button class="btn primary" id="generatePassword">Generate Password</button>
           <button class="btn" id="copyPassword">Copy Password</button>
         </div>
-        <p class="hint">
-          Passwords are generated locally in your browser and are not sent
-          to Keyora's server.
-        </p>
-        <div class="status" id="passwordStatus" aria-live="polite"></div>
+        <p class="hint">Passwords are generated locally in your browser and are not intentionally sent to a Keyora server.</p>
+        <div class="status" id="passwordStatus" role="status"></div>
       </section>
 
-      <!-- WORD COUNTER -->
-      <section class="tool-section" id="words" hidden>
+      <section class="tool" id="words" role="tabpanel"
+        aria-labelledby="tab-words" hidden>
         <div class="tool-heading">
           <h2>Word Counter</h2>
-          <p>Count words, characters, sentences and paragraphs instantly.</p>
+          <p>See your text statistics update as you type.</p>
         </div>
 
         <div class="field">
-          <label for="wordText">Enter or paste your text</label>
-          <textarea id="wordText"
-            placeholder="Start typing or paste your text here..."></textarea>
+          <label for="wordText">Your text</label>
+          <textarea id="wordText" placeholder="Type or paste your text here..."></textarea>
         </div>
 
         <div class="stats" aria-live="polite">
-          <div class="stat">
-            <strong id="wordCount">0</strong>
-            <span>Words</span>
-          </div>
-          <div class="stat">
-            <strong id="charCount">0</strong>
-            <span>Characters</span>
-          </div>
-          <div class="stat">
-            <strong id="sentenceCount">0</strong>
-            <span>Sentences</span>
-          </div>
-          <div class="stat">
-            <strong id="paragraphCount">0</strong>
-            <span>Paragraphs</span>
-          </div>
+          <div class="stat"><strong id="wordCount">0</strong><span>Words</span></div>
+          <div class="stat"><strong id="charCount">0</strong><span>Characters</span></div>
+          <div class="stat"><strong id="sentenceCount">0</strong><span>Sentences</span></div>
+          <div class="stat"><strong id="paragraphCount">0</strong><span>Paragraphs</span></div>
         </div>
 
         <div class="button-row">
           <button class="btn" id="clearText">Clear Text</button>
           <button class="btn primary" id="copyText">Copy Text</button>
         </div>
-        <div class="status" id="wordStatus" aria-live="polite"></div>
+        <div class="status" id="wordStatus" role="status"></div>
       </section>
 
-      <!-- PERCENTAGE CALCULATOR -->
-      <section class="tool-section" id="percentage" hidden>
+      <section class="tool" id="percentage" role="tabpanel"
+        aria-labelledby="tab-percentage" hidden>
         <div class="tool-heading">
           <h2>Percentage Calculator</h2>
-          <p>Calculate percentages, discounts and percentage changes.</p>
+          <p>Work out percentages, changes and discounted prices.</p>
         </div>
 
         <div class="field">
-          <label for="calcMode">What do you want to calculate?</label>
+          <label for="calcMode">Calculation</label>
           <select id="calcMode">
             <option value="of">What is X% of Y?</option>
             <option value="what">X is what percentage of Y?</option>
@@ -590,18 +489,16 @@
 
         <div class="field">
           <label id="firstLabel" for="firstNumber">Percentage (X)</label>
-          <input id="firstNumber" type="number" step="any" value="20"
-            inputmode="decimal">
+          <input id="firstNumber" type="number" step="any" value="20" inputmode="decimal">
         </div>
 
         <div class="field">
           <label id="secondLabel" for="secondNumber">Number (Y)</label>
-          <input id="secondNumber" type="number" step="any" value="150"
-            inputmode="decimal">
+          <input id="secondNumber" type="number" step="any" value="150" inputmode="decimal">
         </div>
 
         <div class="result">
-          <div class="result-label">Your result</div>
+          <div class="muted">YOUR RESULT</div>
           <div class="result-value" id="calcResult" aria-live="polite">30</div>
           <p class="hint" id="calcExplanation">20% of 150 is 30.</p>
         </div>
@@ -610,18 +507,18 @@
           <button class="btn primary" id="calculate">Calculate</button>
           <button class="btn" id="copyResult">Copy Result</button>
         </div>
-        <div class="status" id="calcStatus" aria-live="polite"></div>
+        <div class="status" id="calcStatus" role="status"></div>
       </section>
 
-      <!-- USERNAME GENERATOR -->
-      <section class="tool-section" id="username" hidden>
+      <section class="tool" id="username" role="tabpanel"
+        aria-labelledby="tab-username" hidden>
         <div class="tool-heading">
           <h2>Username Generator</h2>
-          <p>Generate fun username ideas for games and social profiles.</p>
+          <p>Discover username ideas for games and social profiles.</p>
         </div>
 
         <div class="field">
-          <label for="usernameStyle">Choose a style</label>
+          <label for="usernameStyle">Style</label>
           <select id="usernameStyle">
             <option value="cool">Cool & modern</option>
             <option value="gaming">Gaming</option>
@@ -632,82 +529,84 @@
 
         <div class="field">
           <label for="usernameWord">Optional word to include</label>
-          <input id="usernameWord" type="text" maxlength="18"
-            placeholder="e.g. Nova">
+          <input id="usernameWord" type="text" maxlength="18" placeholder="e.g. Nova">
         </div>
 
-        <div class="field">
-          <label class="check">
-            <input id="usernameNumbers" type="checkbox" checked>
-            Add numbers to username ideas
-          </label>
-        </div>
+        <label class="check">
+          <input id="usernameNumbers" type="checkbox" checked>
+          Add numbers to usernames
+        </label>
 
-        <button class="btn primary" id="generateUsernames">
-          Generate Usernames
-        </button>
+        <div class="button-row">
+          <button class="btn primary" id="generateUsernames">Generate Usernames</button>
+        </div>
 
         <div class="username-list" id="usernameList" aria-live="polite">
-          <p class="hint">Tap Generate Usernames to see your ideas.</p>
+          <p class="hint">Generate some ideas to get started.</p>
         </div>
-        <div class="status" id="usernameStatus" aria-live="polite"></div>
-        <p class="hint">
-          Username availability is not checked. A generated name may
-          already be in use on another platform.
-        </p>
+        <div class="status" id="usernameStatus" role="status"></div>
+        <p class="hint">These are suggestions only. Username availability is not checked.</p>
       </section>
-
     </div>
 
     <section class="about">
-      <h2>Simple tools for everyday life</h2>
-      <p>
-        Keyora brings useful little utilities together in one place.
-        Whether you need to create a random password, count words,
-        calculate a percentage or brainstorm a username, you can do
-        it without installing another app.
-      </p>
-      <p>
-        Keyora's tools are designed to run in your browser.
-        Calculation and text-counting features do not require an account.
-      </p>
+      <h2>Useful tools, all in one place</h2>
+      <p>Keyora brings everyday utilities together in a clean, simple experience. Generate passwords, count text, calculate percentages and brainstorm usernames without installing an app.</p>
+      <p>Our tools are designed to work in your browser, without requiring an account.</p>
     </section>
   </main>
 
   <footer>
-    <div class="container">
-      © <span id="year"></span> Keyora. Free online tools.
-    </div>
+    <div class="container">© <span id="year"></span> Keyora. Simple tools. Smarter days.</div>
   </footer>
 
   <script>
+    "use strict";
+
+    const $ = id => document.getElementById(id);
+
     // TOOL NAVIGATION
-    const tabs = document.querySelectorAll(".tool-tab");
-    const sections = document.querySelectorAll(".tool-section");
+    const tabs = [...document.querySelectorAll(".tab")];
+    const sections = [...document.querySelectorAll(".tool")];
 
-    tabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        const selected = tab.dataset.tool;
+    function selectTool(name) {
+      tabs.forEach(tab => {
+        const active = tab.dataset.tool === name;
+        tab.setAttribute("aria-selected", String(active));
+        tab.tabIndex = active ? 0 : -1;
+      });
 
-        tabs.forEach(item => {
-          const active = item === tab;
-          item.classList.toggle("active", active);
-          item.setAttribute("aria-pressed", String(active));
-        });
+      sections.forEach(section => {
+        section.hidden = section.id !== name;
+      });
+    }
 
-        sections.forEach(section => {
-          section.hidden = section.id !== selected;
-        });
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => selectTool(tab.dataset.tool));
+
+      tab.addEventListener("keydown", event => {
+        let next = index;
+
+        if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+        else if (event.key === "ArrowLeft") next = (index - 1 + tabs.length) % tabs.length;
+        else return;
+
+        event.preventDefault();
+        tabs[next].focus();
+        selectTool(tabs[next].dataset.tool);
       });
     });
 
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+    tabs.forEach((tab, index) => {
+      tab.tabIndex = index === 0 ? 0 : -1;
+    });
 
-    // SHARED HELPERS
-    async function copyTextToClipboard(text, statusElement) {
+    $("year").textContent = new Date().getFullYear();
+
+    // COPY HELPER
+    async function copyText(text, status) {
       if (!text) {
-        statusElement.textContent = "There is nothing to copy yet.";
+        status.textContent = "There is nothing to copy yet.";
         return;
       }
 
@@ -715,34 +614,35 @@
         if (navigator.clipboard && window.isSecureContext) {
           await navigator.clipboard.writeText(text);
         } else {
-          const temporary = document.createElement("textarea");
-          temporary.value = text;
-          temporary.style.position = "fixed";
-          temporary.style.opacity = "0";
-          document.body.appendChild(temporary);
-          temporary.select();
-
-          const copied = document.execCommand("copy");
-          temporary.remove();
-
-          if (!copied) throw new Error("Copy failed");
+          const area = document.createElement("textarea");
+          area.value = text;
+          area.style.position = "fixed";
+          area.style.opacity = "0";
+          document.body.appendChild(area);
+          area.select();
+          const success = document.execCommand("copy");
+          area.remove();
+          if (!success) throw new Error("Copy failed");
         }
 
-        statusElement.textContent = "Copied to clipboard!";
+        status.textContent = "Copied to clipboard.";
       } catch {
-        statusElement.textContent =
-          "Copy failed. Please select and copy the text manually.";
+        status.textContent = "Copy failed. Please select and copy manually.";
       }
     }
 
+    // SECURE RANDOM HELPERS
     function randomInt(max) {
       if (!Number.isSafeInteger(max) || max < 1) {
         throw new Error("Invalid random range.");
       }
 
-      // Rejection sampling avoids modulo bias.
+      if (!window.crypto || !crypto.getRandomValues) {
+        throw new Error("Secure random generation is unavailable.");
+      }
+
       const range = 0x100000000;
-      const limit = range - (range % max);
+      const limit = range - range % max;
       const values = new Uint32Array(1);
 
       do {
@@ -752,46 +652,347 @@
       return values[0] % max;
     }
 
-    function randomFrom(text) {
+    function pick(text) {
       return text[randomInt(text.length)];
     }
 
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
+    function shuffle(items) {
+      for (let i = items.length - 1; i > 0; i--) {
         const j = randomInt(i + 1);
-        [array[i], array[j]] = [array[j], array[i]];
+        [items[i], items[j]] = [items[j], items[i]];
       }
-      return array;
+      return items;
     }
 
     function formatNumber(number) {
-      return Number(number.toLocaleString("en-US", {
-        maximumFractionDigits: 8
-      })).toLocaleString("en-US", {
-        maximumFractionDigits: 8
-      });
+      return number.toLocaleString("en-US", { maximumFractionDigits: 8 });
     }
 
-    // PASSWORD GENERATOR
-    const passLength = document.getElementById("passLength");
-    const lengthValue = document.getElementById("lengthValue");
-    const passwordOutput = document.getElementById("passwordOutput");
-    const passwordStatus = document.getElementById("passwordStatus");
-
-    passLength.addEventListener("input", () => {
-      lengthValue.textContent = passLength.value;
-    });
-
+        // PASSWORD GENERATOR
     function generatePassword() {
-      passwordStatus.textContent = "";
+      const length = Number($("passwordLength").value);
+      const useUpper = $("uppercase").checked;
+      const useLower = $("lowercase").checked;
+      const useNumbers = $("numbers").checked;
+      const useSymbols = $("symbols").checked;
 
-      if (!window.crypto || !crypto.getRandomValues) {
-        passwordStatus.textContent =
-          "Secure random generation is not supported in this browser.";
+      let characters = "";
+      let password = "";
+
+      if (useUpper) characters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      if (useLower) characters += "abcdefghijklmnopqrstuvwxyz";
+      if (useNumbers) characters += "0123456789";
+      if (useSymbols) characters += "!@#$%^&*()-_=+[]{}?";
+
+      if (!characters) {
+        $("passwordStatus").textContent =
+          "Select at least one character type.";
+        $("passwordOutput").value = "";
         return;
       }
 
-      const groups = [];
+      $("passwordStatus").textContent = "";
 
-      if (document.getElementById("upper").checked)
-        groupsj
+      const cryptoAvailable =
+        window.crypto && window.crypto.getRandomValues;
+
+      if (!cryptoAvailable) {
+        $("passwordStatus").textContent =
+          "Secure password generation is unavailable in this browser.";
+        return;
+      }
+
+      const randomValues = new Uint32Array(length);
+      window.crypto.getRandomValues(randomValues);
+
+      for (let i = 0; i < length; i++) {
+        password += characters[randomValues[i] % characters.length];
+      }
+
+      $("passwordOutput").value = password;
+    }
+
+    $("passwordLength").addEventListener("input", () => {
+      $("lengthValue").textContent = $("passwordLength").value;
+    });
+
+    $("generatePassword").addEventListener("click", generatePassword);
+
+    $("copyPassword").addEventListener("click", () => {
+      copyText($("passwordOutput").value, $("passwordStatus"));
+    });
+
+    generatePassword();
+
+
+    // WORD COUNTER
+    function updateWordCount() {
+      const text = $("wordInput").value;
+      const trimmed = text.trim();
+
+      const words = trimmed
+        ? trimmed.split(/\s+/).length
+        : 0;
+
+      const characters = text.length;
+      const charactersNoSpaces = text.replace(/\s/g, "").length;
+
+      const sentences = trimmed
+        ? (trimmed.match(/[.!?]+(?=\s|$)/g) || []).length
+        : 0;
+
+      const paragraphs = trimmed
+        ? trimmed.split(/\n\s*\n/).filter(p => p.trim()).length
+        : 0;
+
+      $("wordCount").textContent = words;
+      $("characterCount").textContent = characters;
+      $("noSpaceCount").textContent = charactersNoSpaces;
+      $("sentenceCount").textContent = sentences;
+      $("paragraphCount").textContent = paragraphs;
+
+      const minutes = words / 200;
+
+      $("readingTime").textContent =
+        words === 0
+          ? "0 min"
+          : minutes < 1
+            ? "Less than 1 min"
+            : `${Math.ceil(minutes)} min`;
+    }
+
+    $("wordInput").addEventListener("input", updateWordCount);
+
+    $("clearText").addEventListener("click", () => {
+      $("wordInput").value = "";
+      updateWordCount();
+      $("wordInput").focus();
+    });
+
+    $("copyText").addEventListener("click", () => {
+      copyText($("wordInput").value, $("wordStatus"));
+    });
+
+    updateWordCount();
+
+
+    // PERCENTAGE CALCULATOR
+    function updateCalcLabels() {
+      const mode = $("calcMode").value;
+
+      const labels = {
+        of: ["Percentage (X)", "Number (Y)", "e.g. 20", "e.g. 150"],
+        what: ["Part (X)", "Whole (Y)", "e.g. 30", "e.g. 150"],
+        change: ["Old value", "New value", "e.g. 100", "e.g. 120"],
+        discount: [
+          "Original price",
+          "Discount percentage",
+          "e.g. 20000",
+          "e.g. 15"
+        ]
+      }[mode];
+
+      $("firstLabel").textContent = labels[0];
+      $("secondLabel").textContent = labels[1];
+      $("firstNumber").placeholder = labels[2];
+      $("secondNumber").placeholder = labels[3];
+    }
+
+    function calculate() {
+      const status = $("calcStatus");
+      status.textContent = "";
+
+      const first = $("firstNumber").value.trim();
+      const second = $("secondNumber").value.trim();
+      const x = Number(first);
+      const y = Number(second);
+      const mode = $("calcMode").value;
+
+      if (
+        !first ||
+        !second ||
+        !Number.isFinite(x) ||
+        !Number.isFinite(y)
+      ) {
+        $("calcResult").textContent = "—";
+        $("calcExplanation").textContent =
+          "Enter valid numbers in both fields.";
+        return;
+      }
+
+      let result;
+      let explanation;
+      let suffix = "";
+
+      if (mode === "of") {
+        result = (x / 100) * y;
+        explanation = `${x}% of ${y} is ${formatNumber(result)}.`;
+
+      } else if (mode === "what") {
+        if (y === 0) {
+          $("calcResult").textContent = "Undefined";
+          $("calcExplanation").textContent =
+            "The whole cannot be zero.";
+          return;
+        }
+
+        result = (x / y) * 100;
+        suffix = "%";
+        explanation = `${x} is ${formatNumber(result)}% of ${y}.`;
+
+      } else if (mode === "change") {
+        if (x === 0) {
+          $("calcResult").textContent = "Undefined";
+          $("calcExplanation").textContent =
+            "The old value cannot be zero.";
+          return;
+        }
+
+        result = ((y - x) / Math.abs(x)) * 100;
+        suffix = "%";
+
+        const direction =
+          result > 0 ? "increase" :
+          result < 0 ? "decrease" :
+          "no change";
+
+        explanation =
+          `Percentage ${direction}: ${formatNumber(Math.abs(result))}%.`;
+
+      } else {
+        if (x < 0 || y < 0 || y > 100) {
+          $("calcResult").textContent = "—";
+          $("calcExplanation").textContent =
+            "Enter a non-negative price and a discount from 0 to 100%.";
+          return;
+        }
+
+        result = x * (1 - y / 100);
+
+        explanation =
+          `You save ${formatNumber(x * y / 100)}. ` +
+          `Final price: ${formatNumber(result)}.`;
+      }
+
+      if (!Number.isFinite(result)) {
+        $("calcResult").textContent = "—";
+        $("calcExplanation").textContent =
+          "The result is too large to display.";
+        return;
+      }
+
+      $("calcResult").textContent = formatNumber(result) + suffix;
+      $("calcExplanation").textContent = explanation;
+    }
+
+    $("calcMode").addEventListener("change", () => {
+      updateCalcLabels();
+      calculate();
+    });
+
+    $("calculate").addEventListener("click", calculate);
+    $("firstNumber").addEventListener("input", calculate);
+    $("secondNumber").addEventListener("input", calculate);
+
+    $("copyResult").addEventListener("click", () => {
+      copyText($("calcResult").textContent, $("calcStatus"));
+    });
+
+    updateCalcLabels();
+    calculate();
+
+
+    // USERNAME GENERATOR
+    const usernameWords = {
+      cool: [
+        "Nova", "Echo", "Pixel", "Orbit", "Zen", "Vivid",
+        "Cosmic", "Neon", "Lunar", "Aero", "Velvet", "Onyx"
+      ],
+      gaming: [
+        "Shadow", "Blaze", "Phantom", "Rogue", "Frost", "Vortex",
+        "Storm", "Drift", "Turbo", "Titan", "Ghost", "Quest"
+      ],
+      nature: [
+        "River", "Cedar", "Willow", "Ocean", "Forest", "Maple",
+        "Cloud", "Flora", "Stone", "Dawn", "Breeze", "Meadow"
+      ],
+      minimal: [
+        "Ari", "Kai", "Neo", "Lux", "Ren", "Zed",
+        "Milo", "Nia", "Rio", "Sol", "Ivy", "Leo"
+      ]
+    };
+
+    const endings = [
+      "Wave", "Spark", "Quest", "Bloom", "Craft", "Trail",
+      "Light", "Dash", "Dream", "Works", "Mode", "Verse"
+    ];
+
+    function makeUsername() {
+      const style = $("usernameStyle").value;
+
+      const custom = $("usernameWord").value
+        .trim()
+        .replace(/[^a-zA-Z0-9]/g, "")
+        .slice(0, 18);
+
+      const first = pick(usernameWords[style]);
+      const second = pick(endings);
+
+      let name;
+
+      if (custom) {
+        name = randomInt(2) === 0
+          ? custom + second
+          : first + custom;
+      } else {
+        name = style === "minimal"
+          ? first
+          : first + second;
+      }
+
+      if ($("usernameNumbers").checked) {
+        name += String(10 + randomInt(990));
+      }
+
+      return name;
+    }
+
+    function generateUsernames() {
+      $("usernameStatus").textContent = "";
+      $("usernameList").replaceChildren();
+
+      try {
+        for (let i = 0; i < 6; i++) {
+          const item = document.createElement("div");
+          item.className = "username-item";
+
+          const name = document.createElement("strong");
+          name.textContent = makeUsername();
+
+          const button = document.createElement("button");
+          button.type = "button";
+          button.textContent = "Copy";
+
+          button.addEventListener("click", () => {
+            copyText(name.textContent, $("usernameStatus"));
+          });
+
+          item.append(name, button);
+          $("usernameList").appendChild(item);
+        }
+      } catch {
+        $("usernameStatus").textContent =
+          "Unable to generate usernames in this browser.";
+      }
+    }
+
+    $("generateUsernames").addEventListener(
+      "click",
+      generateUsernames
+    );
+
+    generateUsernames();
+  </script>
+</body>
+</html>
+    
